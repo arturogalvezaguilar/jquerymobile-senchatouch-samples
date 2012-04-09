@@ -1,0 +1,79 @@
+<html>
+<head>
+	<link href="resources/css/sencha-touch.css" type="text/css" rel="stylesheet"/>
+	<script src="sencha-touch.js" type="text/javascript"></script>
+	<script>
+		new Ext.Application(
+			{
+				name : 'Taller',
+				launch : function()
+				{
+					/**
+					* Creamos una instancia de la clase Ext.List y lo almacenamos en la variable lista
+					**/
+					 var lista = new Ext.List(
+						{
+							/**
+							* Este atributo indica si el componente se va a desplegar a modo pantalla completa 
+							**/
+							fullscreen : true,
+							/**
+							* Aqui se define el template o plantilla de los items de la lista los datos que se van a remplazar
+							* se colocan entre {}
+							**/
+							itemTpl : '<input type="text" value="{curso}" />',
+							/**
+							* Con esto indicamos si la lista mostrara un icono en la parte izquierda del item
+							**/
+							onItemDisclosure : true,
+							/**
+							* Indicamos si la lista va ser agrupada
+							**/
+							grouped : true,
+							/**
+							* Aqui se almacena o hace referncia al orgien de datos de donde se cargara a la lista
+							* los datos son una intancia de la clase Store
+							**/
+							store : new Ext.data.Store(
+								{
+									/**
+									* Este atributo almacena los campos  de un conjunto de datos
+									**/
+									fields : ['curso','curso2'],
+									/**
+									* Este atributo almacena los datos en si que se cargaran a la lista
+									**/
+									data : [
+										{curso : 'PHP', curso2 : 'ruby'},
+										{curso : 'JAVA', curso2 : 'python'},
+										{curso : '.NET', curso2 : 'c#'}
+									],
+									/**
+									* es una funcion propia de este componente que te retorna  cada registro o items de la
+									* lista para poder hacer alguna operacion o manipularla en este caso
+									* retorna la primera letra del valor de campo curso
+									**/
+									getGroupString : function(record) {
+										return record.get('curso')[0];
+									}
+								}
+							)
+						}
+					);
+					/**
+					* Asignamos una funcion al evento disclose de la lista
+					* este evento se ejecuta cuando se hace click en el icono de la parte izquierda de la lista
+					* sus parametros son el nombre del evento, funcion o manejador, y el scope o ambito 
+					**/
+					lista.on('disclose', function (record, index, evt) {
+						alert('+1')
+					}, this);
+				}
+			}
+		);
+	</script>
+</head>
+<body>
+
+</body>
+</html>

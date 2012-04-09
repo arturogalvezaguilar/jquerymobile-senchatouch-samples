@@ -1,0 +1,101 @@
+<html>
+<head>
+	<link href="resources/css/sencha-touch.css" type="text/css" rel="stylesheet"/>
+	<script src="sencha-touch.js" type="text/javascript"></script>
+	<script>
+		new Ext.Application(
+			{
+				name : 'Taller',
+				launch : function()
+				{
+					/**
+					* Construimos una instancia de la clase FormPanel
+					**/
+					 new Ext.form.FormPanel(
+						{
+							fullscreen : true,
+							layout : 'hbox',
+							/**
+							* Indicamos si el metodo de envio va ser por ajax o no
+							**/
+							standardSubmit : true,
+							/**
+							* url destino donde se enviara la informacion
+							**/
+							url : 'http://www.google.com.pe/search',
+							/**
+							* componentes que seran agregados al formulario puede ser un objeto o conjunto de objetos
+							**/
+							items : [
+								{
+									/**
+									* atributo que indica de que tipo de clase sera el componente que se creara
+									**/
+									xtype : 'textfield',
+									/**
+									* etiqueta que se mostrara para el componente creado
+									**/
+									label : 'buscar',
+									/**
+									* nombre del componente
+									**/
+									name : 'q',
+									/**
+									* indica si el componente sera requerido (solo graficamente) mostrando un *
+									**/
+									required : true
+								},
+								{
+									xtype : 'selectfield',
+									label : 'campo2',
+									name : 'campo2',
+									/**
+									* items que seran cargados al combo 
+									**/
+									options : [
+										{text : 'text1', value : '1'},
+										{text : 'text2', value : '2'},
+										{text : 'text3', value : '3'}
+									]
+								},
+								{
+									xtype : 'checkboxfield',
+									name : 'seleChk',
+									label : 'seleccion'
+									
+								},
+								{
+									xtype : 'button',
+									text : 'enviar',
+									/**
+									* Una funcion que manejara el evento touch, cuando se presione sobre el boton
+									**/
+									handler : function()
+									{
+										/**
+										* seleccionamos el formulario (contenedor) y ejecutamos su metodo submit
+										* que envia la informacion del formulario a la url que asignamos en el atributo
+										* url del componente FormPanel
+										**/
+										this.up().submit(
+											{
+												/**
+												* Indicamos el metodo de envio POST o GET
+												**/
+												method : 'GET'
+											}
+										);
+									}
+								}
+							]
+						}
+					);
+				}
+			}
+		);
+	</script>
+</head>
+<body>
+
+</body>
+</html>
